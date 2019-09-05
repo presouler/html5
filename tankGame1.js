@@ -26,21 +26,42 @@ function Tank(x,y,direction,color){
 			this.direction=3;
 		}
 		this.shotBullet=function(){
+				var live_bullet=0;
+				for(var i=0;i<mybullets.length;i++){
+					if (mybullets[i].isLive){
+						live_bullet+=1;
+					}
+				}
+				// live_bullet<=1;
+				// for(var i=0;i<mybullets.length;i++){
+					// if (!mybullets[i].isLive){
+						// delete mybullets[i];
+					// }
+				// }
+				if (live_bullet<=1){
+					var bullet1=new bullet(this.x,this.y,this.direction,1);
+		
+					mybullets.push(bullet1);
+			
+					bullet1.timer=setInterval("mybullets["+(mybullets.length-1)+"].run()",50);
 				
-				if (mybullets.length<=2){
-				var bullet1=new bullet(this.x,this.y,this.direction,1);
-				
-				mybullets.push(bullet1);
-				
-				bullet1.timer=setInterval("mybullets["+(mybullets.length-1)+"].run()",50);
-				
-			}else{return;}
+			}
 		}
-	}
+		
+	
+}
+// function checkBullet(){
+		// for(var i=0;i<mybullets.length;i++){
+			// mybullets[i].checklive();
+			// if(!mybullets[i].isLive){
+				// delete mybullets[i];
+			// }
+		// }
+// }
 function drawBullet(){
 	for(var i=0;i<mybullets.length;i++){
 		var mybullet=mybullets[i];
-		if(mybullet!=null && mybullet.checklive()){
+		if(mybullet!=null && mybullet.isLive){
 			// && mybullet.isLive
 			switch(mybullet.direction){
 				case 0:

@@ -11,20 +11,23 @@
 <script>
 	var canvas1=document.getElementById("tankMap");
 	var ctx=canvas1.getContext("2d");
-	var bullet_speed=4;
-	
+	var bullet_speed=12;
+	var x;
 	
 	var Tank1 =new Tank(140,240,0,playerColor);
 	var mybullets=new Array();
-	
-	function clear_bullet(){
-		for (var i=0;i<mybullets.length;i++){
-			if (mybullets[i].checklive()=true){
-				<!-- delete mybullets[i]; -->
-				alert("yes");
-			}else{alert("die");}
-		}
-	}
+	<!-- function mybullets(){ -->
+		
+		<!-- function clear_bullet(){ -->
+			<!-- for (var i=0;i<mybullets.length;i++){ -->
+				<!-- if (mybullets[i].checklive()=true){ -->
+					<!-- delete mybullets[i]; -->
+					<!-- alert("yes"); -->
+				<!-- }else{alert("die");} -->
+			<!-- } -->
+		<!-- } -->
+	<!-- } -->
+	<!-- var mybullets=new mybullets(); -->
 	
 	var enemyTanks =new Array();
 	for(var i=0;i<3;i++){
@@ -52,21 +55,21 @@
 		
 		this.checklive=function(){
 			if(this.x<=0||this.x>=600||this.y<=0||this.y>800){
-				return false;
+				this.isLive=false;
 				
-			}else{return true};
+			}else{this.isLive=true};
 		}
 		
 		this.run=function(){
-			<!-- if(this.x<=0||this.x>=600||this.y<=0||this.y>800){ -->
-				<!-- clearInterval(this.timer); -->
+			if(this.x<=0||this.x>=600||this.y<=0||this.y>800){
+				clearInterval(this.timer);
 				
-				<!-- this.isLive=false; -->
-			<!-- } -->
+				this.isLive=false;
+			}
 			if(!this.isLive){
 				
 				clearInterval(this.timer);
-				
+
 			}
 			else{
 				switch(this.direction){
@@ -85,7 +88,7 @@
 			}
 			
 		}
-		mybullets.push();
+		<!-- mybullets.push(); -->
 		}
 	
 	}
@@ -110,12 +113,13 @@ function Move(){
 			break;
 		case 74:
 			Tank1.shotBullet();
+			<!-- checkBullet(); -->
 			break;
 	}
 	flashTankMap();
 }
 window.setInterval("flashTankMap()",100);
-window.setInterval("clear_bullet()",5000);
+
 </script>
 
 
